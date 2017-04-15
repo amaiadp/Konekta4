@@ -52,17 +52,71 @@ public class Tablero {
 		}
 		return irabazi;
 	}
+	private boolean diagonalEzkerBehe(boolean nor, int row, int col) {
+		boolean irabazi = true;
+		int kont = 0;
+		while(kont<4 && irabazi){
+			if(lista[row-1][col-1]==nor){
+				kont++;
+			}
+			else{
+				irabazi = false;
+			}
+		}
+		return irabazi;
+	}
+	private boolean diagonalEzkerGoi4(boolean nor, int row, int col) {
+		boolean irabazi = true;
+		int kont =0;
+		while(kont<4&& irabazi){
+			if(lista[row+1][col+1]== nor){
+				kont ++;
+			}
+			else{
+				irabazi = false;
+			}
+		}
+		return irabazi;
+	}
+	private boolean goitikBehera(boolean nor, int row, int col) {
+		boolean irabazi = true;
+		int kont = 0;
+		while(kont<4&& irabazi){
+			if(lista[row+1][col]==nor){
+				kont ++;
+			}
+			else{
+				
+				irabazi = false;
+			}
+		}
+		return irabazi;
+	}
+	private boolean ezkerEskuin4(boolean nor, int row, int col) {
+		boolean irabazi = true;
+		int kont =0;
+		while(kont<4&& irabazi){
+			if(lista[row][col+1]==nor){
+				kont ++;
+			}else{
+				
+				irabazi = false;
+			}	
+		}
+		return irabazi;
+		
+	}
 	private int lortuEzkerrekoena(boolean nor, int row, int col) {
 		int kont=0;
-		boolean d=false;
+		boolean amaitu=false;
 		if(col==0){
-			kont=1;
+			return 0;
 		}else{
-			while(!d && col>=1 && col<=8){
+			while(!amaitu && col>0){
 				if(lista[row][col-1]==nor){
 					kont++;
 				}else{
-					d=true;
+					amaitu=true;
 				}
 			}	
 		}
@@ -70,5 +124,43 @@ public class Tablero {
 		return kont;
 	}
 	
-	
+	private int lortuDiagonalEzkerGoi(boolean nor, int row, int col) {
+		int kont =0;
+		boolean amaitu = false;
+		if(col==0|| row ==0){
+			return 0;
+		}
+		else{
+			while(!amaitu && 0<col && 0<row){
+				if(lista[row-1][col+1]==nor){
+					kont ++;
+				}
+				else{
+					amaitu = true;
+				}
+			}
+		}
+		return kont;
+	}
+	private int lortuDiagonalEzkerBehe(boolean nor, int row, int col) {
+		int kont=0;
+		boolean amaitu = false;
+		if(col==8 || row==5){
+			return 0;
+		}
+		else{
+			while(!amaitu && col<8 && row<5){
+				if(lista[row+1][col+1]==nor){
+					kont ++;
+				}
+				else{
+					amaitu = true;
+				}
+			}
+		}
+		return kont;
+	}
 }
+
+
+	
