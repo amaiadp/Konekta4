@@ -160,6 +160,14 @@ public class Tablero {
 		}
 		return kont;
 	}
+	
+	public boolean tableroBarruan(int prow, int pcol){
+		return (prow>=0 && prow<row && pcol>=0 && pcol<column);
+	}
+	
+	public Boolean getNorena(int prow, int pcol){
+		return lista[prow][pcol];
+	}
 }
 
 

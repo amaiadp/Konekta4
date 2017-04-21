@@ -27,4 +27,8 @@ public class Jokalaria {
 		}
 		return row;
 	}
+	
+	public boolean getFitxa(){
+		return this.fitxa;
+	}
 }
