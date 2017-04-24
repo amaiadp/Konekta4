@@ -11,7 +11,7 @@ public class Tablero {
 		}
 		return nireTablero;
 	}
-	public Tablero() {
+	private Tablero() {
 		this.lista = new Boolean[row][column];
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < column; j++) {
@@ -36,26 +36,29 @@ public class Tablero {
 		return row;
 	}
 	public boolean konprobatu(boolean nor, int row, int col) {
+		
 		boolean irabazi=false;
-		int columna= lortuEzkerrekoena(nor, row, col);
-		irabazi=ezkerEskuin4(nor, row, columna);
-		if(!irabazi){
-			irabazi=goitikBehera(nor, row, col);
+			int columna= lortuEzkerrekoena(nor, row, col);
+			irabazi=ezkerEskuin4(nor, row, columna);
 			if(!irabazi){
-				int dif= lortuDiagonalEzkerGoi(nor, row, col);
-				irabazi=diagonalEzkerGoi4(nor, row-dif, col-dif);
+				irabazi=goitikBehera(nor, row, col);
 				if(!irabazi){
-					dif=lortuDiagonalEzkerBehe(nor, row, col);
-					irabazi=diagonalEzkerBehe(nor, row+dif, col+dif);
+					int dif= lortuDiagonalEzkerGoi(nor, row, col);
+					irabazi=diagonalEzkerGoi4(nor, row-dif, col-dif);
+					if(!irabazi){
+						dif=lortuDiagonalEzkerBehe(nor, row, col);
+						irabazi=diagonalEzkerBehe(nor, row+dif, col+dif);
+					}
 				}
 			}
-		}
+		
 		return irabazi;
 	}
+
 	private boolean diagonalEzkerBehe(boolean nor, int row, int col) {
 		boolean irabazi = true;
 		int kont = 0;
-		while(kont<4 && irabazi){
+		while(kont<3 && irabazi){
 			if(lista[row-1][col-1]==nor){
 				kont++;
 			}
@@ -68,7 +71,7 @@ public class Tablero {
 	private boolean diagonalEzkerGoi4(boolean nor, int row, int col) {
 		boolean irabazi = true;
 		int kont =0;
-		while(kont<4&& irabazi){
+		while(kont<3 && irabazi){
 			if(lista[row+1][col+1]== nor){
 				kont ++;
 			}
@@ -81,7 +84,7 @@ public class Tablero {
 	private boolean goitikBehera(boolean nor, int row, int col) {
 		boolean irabazi = true;
 		int kont = 0;
-		while(kont<4&& irabazi){
+		while(kont< 3 && irabazi){
 			if(lista[row+1][col]==nor){
 				kont ++;
 			}
@@ -95,7 +98,7 @@ public class Tablero {
 	private boolean ezkerEskuin4(boolean nor, int row, int col) {
 		boolean irabazi = true;
 		int kont =0;
-		while(kont<4&& irabazi){
+		while(kont<3 && irabazi){
 			if(lista[row][col+1]==nor){
 				kont ++;
 			}else{
@@ -109,7 +112,7 @@ public class Tablero {
 	private int lortuEzkerrekoena(boolean nor, int row, int col) {
 		int kont=0;
 		boolean amaitu=false;
-		if(col==0){
+		if(col<=0){
 			return 0;
 		}else{
 			while(!amaitu && col>0){
@@ -127,7 +130,7 @@ public class Tablero {
 	private int lortuDiagonalEzkerGoi(boolean nor, int row, int col) {
 		int kont =0;
 		boolean amaitu = false;
-		if(col==0|| row ==0){
+		if(col<=0|| row <=0){
 			return 0;
 		}
 		else{

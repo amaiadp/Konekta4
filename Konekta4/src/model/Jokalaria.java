@@ -20,10 +20,9 @@ public class Jokalaria {
 
 	private int tableroanSartu(int col) {
 		Tablero t= Tablero.getNireTablero();
-		Jokalaria j= Jokoa.getNireJokoa().lortuJokalaria();
 		int row =t.azkenaLortuLibre(col);
 		if (row !=-1){
-			t.setTablero(row,col,j.fitxa);
+			t.setTablero(row,col,this.fitxa);
 		}
 		return row;
 	}
