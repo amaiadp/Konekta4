@@ -13,11 +13,6 @@ public class Tablero {
 	}
 	private Tablero() {
 		this.lista = new Boolean[row][column];
-		for(int i = 0; i < row; i++) {
-			for(int j = 0; j < column; j++) {
-				this.lista[i][j] = null;
-			}
-		}
 	}
 	
 	public void setTablero(int row, int col, boolean jok){
@@ -38,12 +33,12 @@ public class Tablero {
 	public boolean konprobatu(boolean nor, int row, int col) {
 		
 		boolean irabazi=false;
-			int columna= lortuEzkerrekoena(nor, row, col);
-			irabazi=ezkerEskuin4(nor, row, columna);
+			int dif= lortuEzkerrekoena(nor, row, col);
+			irabazi=ezkerEskuin4(nor, row, col-dif);
 			if(!irabazi){
 				irabazi=goitikBehera(nor, row, col);
 				if(!irabazi){
-					int dif= lortuDiagonalEzkerGoi(nor, row, col);
+					dif= lortuDiagonalEzkerGoi(nor, row, col);
 					irabazi=diagonalEzkerGoi4(nor, row-dif, col-dif);
 					if(!irabazi){
 						dif=lortuDiagonalEzkerBehe(nor, row, col);
@@ -57,13 +52,18 @@ public class Tablero {
 
 	private boolean diagonalEzkerBehe(boolean nor, int row, int col) {
 		boolean irabazi = true;
+		boolean amaitu = false;
 		int kont = 0;
-		while(kont<3 && irabazi){
-			if(lista[row-1][col-1]==nor){
-				kont++;
-			}
-			else{
-				irabazi = false;
+		while(kont<3 && irabazi && !amaitu){
+			if(this.tableroBarruan(row-1, col-1)){
+				if(lista[row-1][col-1]==nor){
+					kont++;
+				}
+				else{
+					irabazi = false;
+				}
+			}else{
+				amaitu=true;
 			}
 		}
 		return irabazi;
@@ -71,40 +71,53 @@ public class Tablero {
 	private boolean diagonalEzkerGoi4(boolean nor, int row, int col) {
 		boolean irabazi = true;
 		int kont =0;
-		while(kont<3 && irabazi){
-			if(lista[row+1][col+1]== nor){
-				kont ++;
-			}
-			else{
-				irabazi = false;
+		boolean amaitu = false;
+		while(kont<3 && irabazi && !amaitu){
+			if(this.tableroBarruan(row+1, col+1)){
+				if(lista[row+1][col+1]== nor){
+					kont ++;
+				}
+				else{
+					irabazi = false;
+				}
+			}else{
+				amaitu=true;
 			}
 		}
 		return irabazi;
 	}
 	private boolean goitikBehera(boolean nor, int row, int col) {
 		boolean irabazi = true;
+		boolean amaitu = false;
 		int kont = 0;
-		while(kont< 3 && irabazi){
-			if(lista[row+1][col]==nor){
-				kont ++;
-			}
-			else{
-				
-				irabazi = false;
+		while(kont<3 && irabazi && !amaitu){
+			if(this.tableroBarruan(row+1, col)){ 
+				if(lista[row+1][col]==nor){
+					kont ++;
+				}
+				else{
+					irabazi = false;
+				}
+			}else{
+				amaitu=true;
 			}
 		}
 		return irabazi;
 	}
 	private boolean ezkerEskuin4(boolean nor, int row, int col) {
 		boolean irabazi = true;
+		boolean amaitu = false;
 		int kont =0;
-		while(kont<3 && irabazi){
-			if(lista[row][col+1]==nor){
-				kont ++;
+		while(kont<3 && irabazi && !amaitu){
+			if(this.tableroBarruan(row, col+1)){
+				if(lista[row][col+1]==nor){
+					kont ++;
+				}else{
+					irabazi = false;
+				}
 			}else{
-				
-				irabazi = false;
-			}	
+				amaitu=true;
+			}
 		}
 		return irabazi;
 		
@@ -116,8 +129,12 @@ public class Tablero {
 			return 0;
 		}else{
 			while(!amaitu && col>0){
-				if(lista[row][col-1]==nor){
-					kont++;
+				if(this.tableroBarruan(row, col-1)){
+					if(lista[row][col-1]==nor){
+						kont++;
+					}else{
+						amaitu=true;
+					}
 				}else{
 					amaitu=true;
 				}
@@ -134,30 +151,39 @@ public class Tablero {
 			return 0;
 		}
 		else{
-			while(!amaitu && 0<col && 0<row){
-				if(lista[row-1][col+1]==nor){
-					kont ++;
-				}
-				else{
-					amaitu = true;
+			while(!amaitu && 0<col && 0<row){ 
+				if(this.tableroBarruan(row-1, col-1)){
+					if(lista[row-1][col-1]==nor){
+						kont ++;
+					}
+					else{
+						amaitu = true;
+					}
+				}else{
+					amaitu=true;
 				}
 			}
+			
 		}
 		return kont;
 	}
 	private int lortuDiagonalEzkerBehe(boolean nor, int row, int col) {
 		int kont=0;
 		boolean amaitu = false;
-		if(col==8 || row==5){
+		if(col==this.column-1 || row==this.row-1){
 			return 0;
 		}
 		else{
-			while(!amaitu && col<8 && row<5){
-				if(lista[row+1][col+1]==nor){
-					kont ++;
-				}
-				else{
-					amaitu = true;
+			while(!amaitu && col<this.column-1 && row<this.row-1){
+				if(this.tableroBarruan(row+1, col+1)){	
+					if(lista[row+1][col+1]==nor){
+						kont ++;
+					}
+					else{
+						amaitu = true;
+					}
+				}else{
+					amaitu=true;
 				}
 			}
 		}
@@ -170,6 +196,9 @@ public class Tablero {
 	
 	public Boolean getNorena(int prow, int pcol){
 		return lista[prow][pcol];
+	}
+	public Tablero hasieratu() {
+		return this.nireTablero = new Tablero();
 	}
 }
 

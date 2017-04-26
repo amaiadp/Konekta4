@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Jokoa;
+
 public class main extends JFrame{
 	public void hasieratu(){
 	 this.setTitle("Aukeratu");
@@ -36,7 +38,45 @@ public class main extends JFrame{
          panelLetras.add(zaila);
          panelLetras.add(rank);
       
-         this.getContentPane().add(panelLetras);    
+         this.getContentPane().add(panelLetras); 
+         
+         jokjok.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Jokoa.getNireJokoa().hasieratuJokJok();
+				
+			}
+		} );
+         
+         
+         erreza.addActionListener( new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent arg0) {
+ 				Jokoa.getNireJokoa().hasieratuErreza();
+ 				
+ 			}
+ 		} );
+         
+         
+         zaila.addActionListener( new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent arg0) {
+ 				Jokoa.getNireJokoa().hasieratuZaila();
+ 				
+ 			}
+ 		} );
+         
+         rank.addActionListener( new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent arg0) {
+ 			//	Jokoa.getNireJokoa().hasieratuRanking();
+ 				
+ 			}
+ 		} );
       
 }
 	public static void main(String[] args) {

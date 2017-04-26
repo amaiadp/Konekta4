@@ -6,9 +6,18 @@ import java.util.Random;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Ordenagailua extends Jokalaria{
+	public Ordenagailua(boolean pFitxa){
+		//jokalariarekin lotzea falta
+		super(pFitxa);
+		this.jokalariarenPosibleak = new ArrayList<>();
+		this.ordenagiluarenPosibleak = new ArrayList<>();
+	}
+	
 	private class Koordenatua{
 		private int col;
 		private int row;
+		
+		
 		
 		public Koordenatua(int prow, int pcol){
 			row = prow;
@@ -28,12 +37,7 @@ public class Ordenagailua extends Jokalaria{
 	private ArrayList<Koordenatua> ordenagiluarenPosibleak;
 	private ArrayList<Koordenatua> jokalariarenPosibleak;
 	
-	public Ordenagailua(){
-		//jokalariarekin lotzea falta
-		jokatu();
-		this.jokalariarenPosibleak = new ArrayList<>();
-		this.ordenagiluarenPosibleak = new ArrayList<>();
-	}
+	
 	
 	/**
 	 * Ordenagailuak fitxa bat sartzeko duen metodo nagusia. Fitxa sartzeko tokirik hoberena bilatzen du.

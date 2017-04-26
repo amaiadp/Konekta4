@@ -2,7 +2,9 @@ package model;
 
 public class Jokalaria {
 	private boolean fitxa;
-
+	public Jokalaria(boolean pFitxa){
+		fitxa=pFitxa;
+	}
 	public void fitxaSartu(int col){
 		int row=0;
 		Tablero t= Tablero.getNireTablero();

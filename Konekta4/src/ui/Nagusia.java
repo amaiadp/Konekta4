@@ -1,40 +1,47 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.TableView.TableRow;
 
-public class Nagusia extends JFrame{
+import model.Tablero;
 
-	private Laukia[][] tablero = new Laukia[6][9];
+public class Nagusia extends JFrame{
+	private int row=6;
+	private int column=9;
+	private Laukia[][] tablero = new Laukia[row][column];
+	
 	
 	public void hasieratu(){
 				//ZENBAKIAK ALDATU tableroaren tamainarekin
 		JPanel panelTablero = new JPanel();
-		panelTablero.setLayout(new GridLayout(7, 9));
+		panelTablero.setLayout(new GridLayout(row+1, column));
 		this.add(panelTablero);
-		for(int col=0; col<9; col++){
+		for(int col=0; col<column; col++){
 			JButton botoia = new JButton();
 			panelTablero.add(botoia);
 			botoia.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+					Tablero.getNireTablero().hasieratu();
 					
 				}
 			});
 		}
-		for(int row=0; row<6;row++){
-			for(int col=0; col <9;col++){
-				Laukia lauki = new Laukia(row, col);
-				tablero[row][col] = lauki;
+		for(int r=0; r<row;r++){
+			for(int col=0; col <column;col++){
+				Laukia lauki = new Laukia(r, col);
+				tablero[r][col] = lauki;
 				panelTablero.add(lauki);
+				lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
 		}
 	}
@@ -42,6 +49,7 @@ public class Nagusia extends JFrame{
 	public static void main(String[] args) {
 		Nagusia n = new Nagusia();
 		n.hasieratu();
+		n.pack();
 		n.setVisible(true);
 	}
 }
