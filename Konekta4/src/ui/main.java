@@ -45,6 +45,7 @@ public class main extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Jokoa.getNireJokoa().hasieratuJokJok();
+				Nagusia.getnireNagusia().hasieratu();
 				
 			}
 		} );
@@ -55,7 +56,7 @@ public class main extends JFrame{
  			@Override
  			public void actionPerformed(ActionEvent arg0) {
  				Jokoa.getNireJokoa().hasieratuErreza();
- 				
+ 				Nagusia.getnireNagusia().hasieratu();
  			}
  		} );
          
@@ -65,6 +66,7 @@ public class main extends JFrame{
  			@Override
  			public void actionPerformed(ActionEvent arg0) {
  				Jokoa.getNireJokoa().hasieratuZaila();
+ 				Nagusia.getnireNagusia().hasieratu();
  				
  			}
  		} );

@@ -31,6 +31,10 @@ public class Ordenagailua extends Jokalaria{
 		public int getRow(){
 			return row;
 		}
+		public String toString(){
+			return row+","+col;
+			
+		}
 	}
 	
 	
@@ -43,16 +47,17 @@ public class Ordenagailua extends Jokalaria{
 	 * Ordenagailuak fitxa bat sartzeko duen metodo nagusia. Fitxa sartzeko tokirik hoberena bilatzen du.
 	 */
 	
-	public void jokatu(){
-		ezabatuZerrendatik(row, col, ordenagiluarenPosibleak);
-		//ezabatuZerrendatik(row, col, jokalariarenPosibleak);
+	public void jokatuZaila(){
+		System.out.println(toString());
+		ezabatuZerrendatik(Jokoa.getNireJokoa().getAzkenRow(), Jokoa.getNireJokoa().getAzkenCol(), ordenagiluarenPosibleak);
+		ezabatuZerrendatik(Jokoa.getNireJokoa().getAzkenRow(), Jokoa.getNireJokoa().getAzkenCol(), jokalariarenPosibleak);
 		int non = ordenagailuak4();
 		if(non==-1){
 			kalkulatuJokalariarenAzkena();
 			non = jokalariak4();
 			if(non==-1){
 				boolean egokia = false;
-				non = Math.random()*Tablero.column;
+				non = (int) (Math.random()*Tablero.column);
 				int hasiera = non;
 				while(!egokia){
 					non = (non+1) % Tablero.column;
@@ -67,10 +72,10 @@ public class Ordenagailua extends Jokalaria{
 				}
 			}
 		}
-		
-		this.fitxaSartu(non);
+		System.out.println(toString());
 		int row =Tablero.getNireTablero().azkenaLortuLibre(non);
-		//ezabatuZerrendatik(row,non,ordenagiluarenPosibleak);
+		this.fitxaSartu(non);
+		ezabatuZerrendatik(row,non,ordenagiluarenPosibleak);
 		ezabatuZerrendatik(row,non,jokalariarenPosibleak);
 		kalkulatuOrdenagailuarenAzkena(row, non);
 	}
@@ -85,7 +90,7 @@ public class Ordenagailua extends Jokalaria{
 	}
 
 	private void kalkulatuJokalariarenAzkena() {
-		kalkulatu4nonEginPosible(row, col, !this.getFitxa(), jokalariarenPosibleak);
+		kalkulatu4nonEginPosible(Jokoa.getNireJokoa().getAzkenRow(), Jokoa.getNireJokoa().getAzkenCol(), !this.getFitxa(), jokalariarenPosibleak);
 		
 	}
 
@@ -96,7 +101,7 @@ public class Ordenagailua extends Jokalaria{
 	 */
 	private boolean hurrengoanJokalariakEzIrabazi(int col) {
 		int hurrengoa = Tablero.getNireTablero().azkenaLortuLibre(col);	
-		return !bilatuKoordenatua(col, hurrengoa+1, jokalariarenPosibleak);
+		return !bilatuKoordenatua(col, hurrengoa-1, jokalariarenPosibleak);
 	}
 	
 	/**
@@ -178,6 +183,7 @@ public class Ordenagailua extends Jokalaria{
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, hutsaRow, zerrenda);
 		}
+		irten = false;
 		momentukoCol = col+1;
 		momentukoRow = row -1;
 		while (momentukoCol< col +4 && !irten){
@@ -267,6 +273,7 @@ public class Ordenagailua extends Jokalaria{
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, hutsaRow, zerrenda);
 		}
+		irten = false;
 		momentukoCol = col+1;
 		momentukoRow = row +1;
 		while (momentukoCol< col +4 && !irten){
@@ -324,8 +331,10 @@ public class Ordenagailua extends Jokalaria{
 		int kont = 0;
 		while(!amaitu){
 			if(Tablero.getNireTablero().tableroBarruan(momentukoRow, col)){
-				if(Tablero.getNireTablero().getNorena(momentukoRow, col)){
+				Boolean norena =Tablero.getNireTablero().getNorena(momentukoRow, col);
+				if(norena!=null && norena==mota){
 					kont++;
+					momentukoRow++;
 				}else{
 					amaitu=true;
 				}
@@ -372,6 +381,7 @@ public class Ordenagailua extends Jokalaria{
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, row, zerrenda);
 		}
+		irten = false;
 		momentukoCol = col+1;
 		while (momentukoCol< col +4 && !irten){
 			//4 posizio arinago dagoena kendu
@@ -435,12 +445,24 @@ public class Ordenagailua extends Jokalaria{
 		return aurkitua;
 	}
 	private void ezabatuZerrendatik(int row, int col, ArrayList<Koordenatua> zerrenda) {
-		for (Koordenatua koordenatua : zerrenda) {
+		for (int i =0; i<zerrenda.size();i++) {
+			Koordenatua koordenatua = zerrenda.get(i);
 			int kcol = koordenatua.getCol();
 			int krow = koordenatua.getRow();
 			if(kcol==col && krow==row){
-				zerrenda.remove(koordenatua);
+				zerrenda.remove(i);
 			}
 		}	
+	}
+
+	public void jokatuErraza() {
+		this.fitxaSartu((int) (Math.random()*Tablero.column));
+		
+	}
+	
+	public String toString(){
+		String mezua = "Ordenagailuaren hurrengoak: "+ordenagiluarenPosibleak.toString();
+		mezua = mezua + "\nJokalariaren hurrengoak: "+jokalariarenPosibleak.toString();
+		return mezua;
 	}
 }

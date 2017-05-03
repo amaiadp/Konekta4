@@ -2,8 +2,8 @@ package model;
 
 public class Tablero {
 	private static Tablero nireTablero;
-	private int row=6;
-	private int column=9;
+	public static int row=6;
+	public static int column=9;
 	private Boolean[][] lista;
 	public static Tablero getNireTablero() {
 		if (nireTablero == null) {
@@ -22,10 +22,14 @@ public class Tablero {
 		int row=-1;
 		boolean azkena=false;
 		while(!azkena){
-			if(lista[row+1][col]!=null){
-				azkena=true;
+			if(tableroBarruan(row+1, col)){
+				if(lista[row+1][col]!=null){
+					azkena=true;
+				}else{
+					row++;
+				}
 			}else{
-				row++;
+				azkena=true;
 			}
 		}
 		return row;
@@ -42,7 +46,7 @@ public class Tablero {
 					irabazi=diagonalEzkerGoi4(nor, row-dif, col-dif);
 					if(!irabazi){
 						dif=lortuDiagonalEzkerBehe(nor, row, col);
-						irabazi=diagonalEzkerBehe(nor, row+dif, col+dif);
+						irabazi=diagonalEzkerBehe(nor, row+dif, col-dif);
 					}
 				}
 			}
@@ -51,73 +55,83 @@ public class Tablero {
 	}
 
 	private boolean diagonalEzkerBehe(boolean nor, int row, int col) {
-		boolean irabazi = true;
 		boolean amaitu = false;
-		int kont = 0;
-		while(kont<3 && irabazi && !amaitu){
-			if(this.tableroBarruan(row-1, col-1)){
-				if(lista[row-1][col-1]==nor){
+		int kont = 1;
+		while(kont<4 && !amaitu){
+			System.out.println("dEB: " +nor+" "+ kont);
+			if(this.tableroBarruan(row-1, col+1)){
+				if(lista[row-1][col+1]!= null &&lista[row-1][col+1]==nor){
 					kont++;
+					row--;
+					col++;
 				}
 				else{
-					irabazi = false;
+					amaitu=true;
 				}
 			}else{
 				amaitu=true;
 			}
 		}
-		return irabazi;
+		return kont>=4;
 	}
 	private boolean diagonalEzkerGoi4(boolean nor, int row, int col) {
-		boolean irabazi = true;
-		int kont =0;
+		int kont =1;
 		boolean amaitu = false;
-		while(kont<3 && irabazi && !amaitu){
+		while(kont<4 && !amaitu){
+			System.out.println("dEG: " +nor+" "+ kont);
 			if(this.tableroBarruan(row+1, col+1)){
-				if(lista[row+1][col+1]== nor){
+				if(lista[row+1][col+1]!=null && lista[row+1][col+1]== nor){
 					kont ++;
+					row++;
+					col++;
 				}
 				else{
-					irabazi = false;
+					amaitu=true;
 				}
 			}else{
 				amaitu=true;
 			}
 		}
-		return irabazi;
+		return kont>=4;
 	}
 	private boolean goitikBehera(boolean nor, int row, int col) {
-		boolean irabazi = true;
 		boolean amaitu = false;
-		int kont = 0;
-		while(kont<3 && irabazi && !amaitu){
+		int kont = 1;
+		while(kont<4 && !amaitu){
+			System.out.println("GB: " +nor+" "+ kont);
 			if(this.tableroBarruan(row+1, col)){ 
-				if(lista[row+1][col]==nor){
+				if(lista[row+1][col]!=null && lista[row+1][col]==nor){
 					kont ++;
+					row++;
 				}
 				else{
-					irabazi = false;
+					amaitu= true;
 				}
 			}else{
 				amaitu=true;
 			}
 		}
-		return irabazi;
+		return kont>=4;
 	}
 	private boolean ezkerEskuin4(boolean nor, int row, int col) {
-		boolean irabazi = true;
+		boolean irabazi = false;
 		boolean amaitu = false;
-		int kont =0;
-		while(kont<3 && irabazi && !amaitu){
+		int kont =1;
+		while(kont<4 && !amaitu){
+			System.out.println("EzEs: " +nor+" "+ kont);
 			if(this.tableroBarruan(row, col+1)){
-				if(lista[row][col+1]==nor){
+				if(lista[row][col+1]!=null && lista[row][col+1]==nor){
 					kont ++;
+					col++;
 				}else{
-					irabazi = false;
+					amaitu = true;
 				}
 			}else{
 				amaitu=true;
 			}
+		}
+		if(kont>=4){
+			irabazi = true;
 		}
 		return irabazi;
 		
@@ -129,9 +143,11 @@ public class Tablero {
 			return 0;
 		}else{
 			while(!amaitu && col>0){
+				System.out.println("lEz: " +nor+" "+ kont);
 				if(this.tableroBarruan(row, col-1)){
-					if(lista[row][col-1]==nor){
+					if(lista[row][col-1]!=null && lista[row][col-1]==nor){
 						kont++;
+						col--;
 					}else{
 						amaitu=true;
 					}
@@ -152,9 +168,12 @@ public class Tablero {
 		}
 		else{
 			while(!amaitu && 0<col && 0<row){ 
+				System.out.println("lDEG: " +nor+" "+ kont);
 				if(this.tableroBarruan(row-1, col-1)){
-					if(lista[row-1][col-1]==nor){
+					if(lista[row-1][col-1]!=null &&lista[row-1][col-1]==nor){
 						kont ++;
+						row--;
+						col--;
 					}
 					else{
 						amaitu = true;
@@ -170,14 +189,17 @@ public class Tablero {
 	private int lortuDiagonalEzkerBehe(boolean nor, int row, int col) {
 		int kont=0;
 		boolean amaitu = false;
-		if(col==this.column-1 || row==this.row-1){
+		if(col==0 || row==Tablero.row-1){
 			return 0;
 		}
 		else{
-			while(!amaitu && col<this.column-1 && row<this.row-1){
-				if(this.tableroBarruan(row+1, col+1)){	
-					if(lista[row+1][col+1]==nor){
+			while(!amaitu && col>0 && row<Tablero.row-1){
+				System.out.println("dlDEB: " +nor+" "+ kont);
+				if(this.tableroBarruan(row+1, col-1)){	
+					if(lista[row+1][col-1]!=null && lista[row+1][col-1]==nor){
 						kont ++;
+						row++;
+						col--;
 					}
 					else{
 						amaitu = true;
@@ -199,6 +221,15 @@ public class Tablero {
 	}
 	public Tablero hasieratu() {
 		return this.nireTablero = new Tablero();
+	}
+	public boolean tableroaBeteta() {
+		boolean beteta = true;
+		for(int i =0; i<Tablero.column;i++){
+			if(lista[0][i]==null){
+				beteta=false;
+			}
+		}
+		return beteta;
 	}
 }
 
