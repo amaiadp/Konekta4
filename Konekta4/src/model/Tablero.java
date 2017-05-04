@@ -15,7 +15,7 @@ public class Tablero {
 		this.lista = new Boolean[row][column];
 	}
 	
-	public void setTablero(int row, int col, boolean jok){
+	public void setTablero(int row, int col, Boolean jok){
 		this.lista[row][col]=jok;
 	}
 	public int azkenaLortuLibre(int col) {
@@ -230,6 +230,26 @@ public class Tablero {
 			}
 		}
 		return beteta;
+	}
+	
+	public void inprimatu(){
+		for (Boolean[] lerro : lista) {
+			System.out.println("+---+---+---+---+---+---+---+---+---+");
+			System.out.print("|");
+			for (Boolean gela : lerro) {
+				if(gela==null){
+					System.out.print("   |");
+				}else{
+					if(gela==true){
+						System.out.print(" J |");
+					}else{
+						System.out.print(" O |");
+					}
+				}
+			}
+			System.out.println();
+		}
+		System.out.println("+---+---+---+---+---+---+---+---+---+");
 	}
 }
 

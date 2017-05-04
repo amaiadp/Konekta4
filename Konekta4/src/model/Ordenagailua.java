@@ -178,7 +178,12 @@ public class Ordenagailua extends Jokalaria{
 			momentukoCol--;
 			momentukoRow++;
 		}
-		int begiratutakoColTxikiena = momentukoCol +1;
+		int begiratutakoColTxikiena;	
+		if(irten){
+			begiratutakoColTxikiena = momentukoCol+2;
+		}else{
+			begiratutakoColTxikiena = momentukoCol+1;
+		}
 		//int begiratutakoRowTxikiena = momentukoRow +1;
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, hutsaRow, zerrenda);
@@ -208,7 +213,14 @@ public class Ordenagailua extends Jokalaria{
 				Boolean norena = Tablero.getNireTablero().getNorena(momentukoRow, momentukoCol);
 				if(norena==null){
 					if(hutsaCol!=-1){
-						irten =true;
+						if(hutsaCol>col){
+							irten =true;
+						}else{
+							kopurua = momentukoCol-hutsaCol;
+							begiratutakoColTxikiena = hutsaCol;
+							hutsaCol = momentukoCol;
+							hutsaRow = momentukoRow;
+						}
 					}else{
 						hutsaCol = momentukoCol;
 						hutsaRow = momentukoRow;
@@ -268,7 +280,12 @@ public class Ordenagailua extends Jokalaria{
 			momentukoCol--;
 			momentukoRow--;
 		}
-		int begiratutakoColTxikiena = momentukoCol +1;
+		int begiratutakoColTxikiena;	
+		if(irten){
+			begiratutakoColTxikiena = momentukoCol+2;
+		}else{
+			begiratutakoColTxikiena = momentukoCol+1;
+		}
 		//int begiratutakoRowTxikiena = momentukoRow +1;
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, hutsaRow, zerrenda);
@@ -298,7 +315,14 @@ public class Ordenagailua extends Jokalaria{
 				Boolean norena = Tablero.getNireTablero().getNorena(momentukoRow, momentukoCol);
 				if(norena==null){
 					if(hutsaCol!=-1){
-						irten =true;
+						if(hutsaCol>col){
+							irten =true;
+						}else{
+							kopurua = momentukoCol-hutsaCol;
+							begiratutakoColTxikiena = hutsaCol;
+							hutsaCol = momentukoCol;
+							hutsaRow = momentukoRow;
+						}
 					}else{
 						hutsaCol = momentukoCol;
 						hutsaRow = momentukoRow;
@@ -377,7 +401,13 @@ public class Ordenagailua extends Jokalaria{
 			}
 			momentukoCol--;
 		}
-		int begiratutakoColTxikiena = momentukoCol +1;
+		
+		int begiratutakoColTxikiena;	
+		if(irten){
+			begiratutakoColTxikiena = momentukoCol+2;
+		}else{
+			begiratutakoColTxikiena = momentukoCol+1;
+		}
 		if(kopurua==4 && hutsaCol!=-1){
 			sartuKoordenatuaEzBadago(hutsaCol, row, zerrenda);
 		}
@@ -404,7 +434,13 @@ public class Ordenagailua extends Jokalaria{
 				Boolean norena = Tablero.getNireTablero().getNorena(row, momentukoCol);
 				if(norena==null){
 					if(hutsaCol!=-1){
-						irten =true;
+						if(hutsaCol>col){
+							irten =true;
+						}else{
+							kopurua = momentukoCol-hutsaCol;
+							begiratutakoColTxikiena = hutsaCol;
+							hutsaCol = momentukoCol;				
+						}
 					}else{
 						hutsaCol = momentukoCol;
 						kopurua++;
@@ -456,7 +492,14 @@ public class Ordenagailua extends Jokalaria{
 	}
 
 	public void jokatuErraza() {
-		this.fitxaSartu((int) (Math.random()*Tablero.column));
+		int non =(int) (Math.random()*Tablero.column);
+		
+		boolean sartuta = false;
+		while(!sartuta ){
+			non = non % Tablero.column;
+			sartuta = this.fitxaSartu(non);
+			non++;
+		}
 		
 	}
 	
