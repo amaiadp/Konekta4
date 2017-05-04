@@ -1,24 +1,35 @@
 package ui;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import kud.LanguagesController;
 import model.Jokoa;
 
 public class main extends JFrame{
+	
+	private LanguagesController hiztegi = Hizkuntza.getHiztegi();
+	private static main nireMain;
+	
+	private main(){
+		hasieratu();
+		setVisible(true);
+	}
+	
+	public static main getMain(){
+		if(nireMain==null){
+			nireMain = new main();
+		}
+		return nireMain;
+	}
+	
 	public void hasieratu(){
-	 this.setTitle("Aukeratu");
+	 this.setTitle(hiztegi.getWord("Aukeratu"));
      this.setSize(600,75); //ancho, alto
      this.setLayout(new GridLayout(1,2));
      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,10 +40,10 @@ public class main extends JFrame{
          JPanel panelLetras = new JPanel();
          panelLetras.setLayout(new FlowLayout());
          panelLetras.setSize(500,117);         
-         JButton  jokjok = new JButton("Jokalari vs Jokalari");
-         JButton erreza = new JButton("Ordenagailu erreza");
-         JButton  zaila = new JButton("Ordenagailu zaila");
-         JButton rank = new JButton("Rankig-a ikusi");
+         JButton  jokjok = new JButton(hiztegi.getWord("BJvsj"));
+         JButton erreza = new JButton(hiztegi.getWord("BErraza"));
+         JButton  zaila = new JButton(hiztegi.getWord("BZaila"));
+         JButton rank = new JButton(hiztegi.getWord("BRanking"));
          panelLetras.add(erreza);
          panelLetras.add(jokjok);
          panelLetras.add(zaila);
@@ -46,7 +57,7 @@ public class main extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Jokoa.getNireJokoa().hasieratuJokJok();
 				Nagusia.getnireNagusia().hasieratu();
-				
+				setVisible(false);
 			}
 		} );
          
@@ -57,6 +68,7 @@ public class main extends JFrame{
  			public void actionPerformed(ActionEvent arg0) {
  				Jokoa.getNireJokoa().hasieratuErreza();
  				Nagusia.getnireNagusia().hasieratu();
+ 				setVisible(false);
  			}
  		} );
          
@@ -67,6 +79,7 @@ public class main extends JFrame{
  			public void actionPerformed(ActionEvent arg0) {
  				Jokoa.getNireJokoa().hasieratuZaila();
  				Nagusia.getnireNagusia().hasieratu();
+ 				setVisible(false);
  				
  			}
  		} );
@@ -75,15 +88,14 @@ public class main extends JFrame{
  			
  			@Override
  			public void actionPerformed(ActionEvent arg0) {
- 			//	Jokoa.getNireJokoa().hasieratuRanking();
- 				
+ 				new RankingTab();
  			}
  		} );
       
 }
-	public static void main(String[] args) {
-		main n = new main();
-		n.hasieratu();
-		n.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		main n = new main();
+//		n.hasieratu();
+//		n.setVisible(true);
+//	}
 }

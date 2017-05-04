@@ -30,7 +30,7 @@ public class Nagusia extends JFrame{
 	private JLabel[][] tablero;
 	private static Nagusia nagusia;
 	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
-	private JLabel kron = new JLabel("0");
+	private JLabel kron = new JLabel("0", JLabel.CENTER);
 	
 	
 	private Nagusia(){
@@ -45,21 +45,23 @@ public class Nagusia extends JFrame{
 	}
 	
 	public void hasieratu(){
+		kron.setText("0");
 				//ZENBAKIAK ALDATU tableroaren tamainarekin
 		tablero = new JLabel[row][column];
 		JPanel panelTablero = new JPanel();
 		GridLayout glayout = new GridLayout(row+1, column);
 		panelTablero.setLayout(glayout);
+		getContentPane().removeAll();
+		getContentPane().repaint();
 		getContentPane().add(panelTablero, BorderLayout.CENTER);
 		JPanel panela = new JPanel();
 		if (Jokoa.getNireJokoa().getModua()==0){
-			JLabel jok1 = new JLabel(hiztegia.getWord("Jok1"));
+			JLabel jok1 = new JLabel(hiztegia.getWord("Jok1"), JLabel.CENTER);
 			jok1.setForeground(Color.red);
-			jok1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-			JLabel jok2 = new JLabel(hiztegia.getWord("Jok2"));
+			jok1.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+			JLabel jok2 = new JLabel(hiztegia.getWord("Jok2"), JLabel.CENTER);
 			jok2.setForeground(Color.blue);
-			jok2.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-//			JLabel espacio =  new JLabel("                   ");
+			jok2.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 			panela.add(jok1, BorderLayout.WEST);
 			panela.add(jok2, BorderLayout.EAST);
 		}
@@ -112,6 +114,7 @@ public class Nagusia extends JFrame{
 		for(int r=0; r<row;r++){
 			for(int col=0; col <column;col++){
 				JLabel lauki = new JLabel();
+				lauki.setHorizontalAlignment(JLabel.CENTER);
 				tablero[r][col] = lauki;
 				panelTablero.add(lauki);
 				lauki.setBorder(BorderFactory.createLineBorder(Color.BLACK));

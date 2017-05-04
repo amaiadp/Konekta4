@@ -10,11 +10,9 @@ import javax.swing.JPanel;
 import kud.LanguagesController;
 
 public class Ranking extends JPanel{
-	private int modua;
-	private LanguagesController hiztegia = new LanguagesController("Español");
+	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
 	
 	public Ranking(int zailtasun){
-		modua = zailtasun;
 		this.setLayout(new BorderLayout());
 		Table taula = new Table(zailtasun);
 		JLabel labela = new JLabel();

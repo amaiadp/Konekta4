@@ -28,7 +28,7 @@ public class Kronometro{
 		martxan = false;
 	}
 	
-	public long getDenboraTartea(){
+	public int getDenboraTartea(){
 		long tarte;
 		if(martxan){
 			tarte = ((System.currentTimeMillis() - hasieraDenb) / 1000);
@@ -36,7 +36,7 @@ public class Kronometro{
 		else{
 			tarte = ((geldituDenb - hasieraDenb) / 1000);
 		}
-		return tarte;
+		return (int) tarte;
 	}
 
 	public void hasieratu(){

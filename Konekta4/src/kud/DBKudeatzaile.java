@@ -32,7 +32,6 @@ public class DBKudeatzaile {
 
 
 	private void conClose() {
-
 		if (conn != null)
 			try {
 				conn.close();

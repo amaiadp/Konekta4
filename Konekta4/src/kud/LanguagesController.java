@@ -1,9 +1,6 @@
 package kud;
 
 import java.util.*;
-import java.util.ResourceBundle.Control;
-
-import ui.main;
 
 
 public class LanguagesController {

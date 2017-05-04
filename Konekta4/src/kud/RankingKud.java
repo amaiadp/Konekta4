@@ -29,15 +29,29 @@ public class RankingKud {
 				emaitza.add(lerro);
 			}
 			return emaitza;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
 	}
 	
-	public void rankingGehitu(String izena, String denbora, int zailtasun){
-		dbkud.execSQL(String.format("INSERT INTO irabazleak VALUES (%s, %s, %d)",izena, denbora, zailtasun));
+	public void rankingGehitu(String izena, int denbora, int zailtasun){
+		dbkud.execSQL(String.format("INSERT INTO irabazleak VALUES ('%s', %d, %d)",izena, denbora, zailtasun));
+	}
+
+	public boolean sartuDa(int modu, int denbora) {
+		ResultSet rs = dbkud.execSQL(String.format("SELECT COUNT(*) FROM irabazleak WHERE zailtasun=%d AND denbora<%d", modu, denbora));
+		int kontagailua = Integer.MAX_VALUE;
+		try{
+			while (rs.next()){
+				kontagailua = rs.getInt("COUNT(*)");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Kontagailua: " +Integer.toString(kontagailua));
+		return kontagailua<10;
 	}
 	
 	

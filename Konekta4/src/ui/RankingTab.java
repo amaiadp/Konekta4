@@ -2,18 +2,15 @@ package ui;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 
 import kud.LanguagesController;
-import model.Jokoa;
 
 
-public class RankingTab extends JFrame{
+public class RankingTab extends JDialog{
 
-
-//	private LanguagesController hiztegia = Nagusia.getNagusia().getHiztegia();
-	private LanguagesController hiztegia = new LanguagesController("Español");
+	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
 	
 	public RankingTab(){
 		hasieratu();
@@ -22,6 +19,7 @@ public class RankingTab extends JFrame{
 	private void hasieratu(){
 		this.setTitle("RankingTab");
 		getContentPane().setLayout(new BorderLayout());
+		setModal(true);
 		JTabbedPane tabPanel = new JTabbedPane(2);
 		Ranking rErraza = new Ranking(1);
 		Ranking rZaila = new Ranking(2);

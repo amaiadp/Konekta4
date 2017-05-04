@@ -1,7 +1,6 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,15 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import kud.LanguagesController;
-import model.Jokoa;
 
 public class Hizkuntza extends JFrame{
 
-	private Hizkuntza hizkuntza = null;
 	private static LanguagesController hiztegi; 
 	
 	public static LanguagesController getHiztegi(){
 		if (hiztegi==null){
+			System.out.println("Oraindik ez dago hiztegirik");
 			hiztegi = new LanguagesController("Euskera");
 		}
 		return hiztegi;
@@ -45,9 +43,7 @@ public class Hizkuntza extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					Hizkuntza.hiztegi = new LanguagesController("Euskera");
-					main m = new main();
-					m.hasieratu();
-					m.setVisible(true);
+					main.getMain();
 					Hizkuntza.this.setVisible(false);
 				}
 			} );
@@ -58,9 +54,7 @@ public class Hizkuntza extends JFrame{
 	 			@Override
 	 			public void actionPerformed(ActionEvent arg0) {
 	 				Hizkuntza.hiztegi = new LanguagesController("Español");
-					main m = new main();
-					m.hasieratu();
-					m.setVisible(true);
+					main.getMain();
 					Hizkuntza.this.setVisible(false);
 	 			}
 	 		} );

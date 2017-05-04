@@ -1,24 +1,19 @@
 package ui;
 
-import java.awt.Image;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 import kud.LanguagesController;
 import kud.RankingKud;
-import model.Jokoa;
 
 public class MyTableModel extends AbstractTableModel {
 
 	private Vector<String[]> data = new Vector<String[]>();
 	private Vector<String> columnNames = new Vector<String>();
 	private RankingKud kud = RankingKud.getInstantzia();
-	private LanguagesController hiztegia = new LanguagesController("Español");
+	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
 	
 	public MyTableModel(){
 		hasieratuZutabeIzenak();
