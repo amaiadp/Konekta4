@@ -8,6 +8,8 @@ public class Jokoa {
 	private Jokalaria irabazlea=null;
 	private int azkenRow;
 	private int azkenCol;
+	private boolean kronHasi;
+	
 	public static Jokoa getNireJokoa() {
 		if (nireJokoa == null) {
 			nireJokoa = new Jokoa();
@@ -33,6 +35,7 @@ public class Jokoa {
 		jokalariak[0]=j1;
 		jokalariak[1]=j2;
 		Tablero t = Tablero.getNireTablero().hasieratu();
+		kronHasi=false;
 		
 		
 	}
@@ -47,6 +50,7 @@ public class Jokoa {
 		jokalariak[1]=ord;
 		jokalariak[0]=j;
 		Tablero t = Tablero.getNireTablero().hasieratu();
+		kronHasi=false;
 		
 	}
 	public void hasieratuZaila() {
@@ -60,6 +64,7 @@ public class Jokoa {
 		jokalariak[1]=ord;
 		jokalariak[0]=j;
 		Tablero t = Tablero.getNireTablero().hasieratu();
+		kronHasi=false;
 		
 	}
 	public void txandaGehitu() {
@@ -90,10 +95,29 @@ public class Jokoa {
 	}
 	public void amaitu() {
 		// TODO Auto-generated method stub
+		if (modua==0){
+			if(irabazlea==null){
+				//Ez du inork irabazi :(
+			}
+			else{
+				//X Jokalariak irabazi du
+			}
+		}
+		else{
+			
+		}
 		System.out.println("Jokoa amaituta dago");
 	}
 	public boolean amaituta() {
 		return irabazlea!=null || Tablero.getNireTablero().tableroaBeteta();
+	}
+	public boolean kronHasita() {
+		return kronHasi;
+	}
+	
+	public void kronHasi(){
+		kronHasi=true;
+		Kronometro.getKronometro().hasieratu();
 	}
 	
 }

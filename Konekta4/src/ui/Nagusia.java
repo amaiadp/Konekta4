@@ -1,6 +1,9 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.text.TableView.TableRow;
 
+import kud.LanguagesController;
 import model.Jokalaria;
 import model.Jokoa;
 import model.Ordenagailua;
@@ -24,6 +29,8 @@ public class Nagusia extends JFrame{
 	private int column=9;
 	private JLabel[][] tablero;
 	private static Nagusia nagusia;
+	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
+	private JLabel kron = new JLabel("0");
 	
 	
 	private Nagusia(){
@@ -43,15 +50,40 @@ public class Nagusia extends JFrame{
 		JPanel panelTablero = new JPanel();
 		GridLayout glayout = new GridLayout(row+1, column);
 		panelTablero.setLayout(glayout);
-		this.add(panelTablero);
+		getContentPane().add(panelTablero, BorderLayout.CENTER);
+		JPanel panela = new JPanel();
+		if (Jokoa.getNireJokoa().getModua()==0){
+			JLabel jok1 = new JLabel(hiztegia.getWord("Jok1"));
+			jok1.setForeground(Color.red);
+			jok1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+			JLabel jok2 = new JLabel(hiztegia.getWord("Jok2"));
+			jok2.setForeground(Color.blue);
+			jok2.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+//			JLabel espacio =  new JLabel("                   ");
+			panela.add(jok1, BorderLayout.WEST);
+			panela.add(jok2, BorderLayout.EAST);
+		}
+		else{
+			kron.setHorizontalTextPosition(SwingConstants.CENTER);
+			kron.setHorizontalAlignment(SwingConstants.CENTER);
+			kron.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+			panela.add(kron, BorderLayout.CENTER);
+		}
+		getContentPane().add(panela, BorderLayout.NORTH);
 		for(int col=0; col<column; col++){
-			int zutabe = col;
+			final int zutabe = col;
 			JButton botoia = new JButton();
 			panelTablero.add(botoia);
 			botoia.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					if(Jokoa.getNireJokoa().getModua()!=0){
+						if(!Jokoa.getNireJokoa().kronHasita()){
+							Jokoa.getNireJokoa().kronHasi();
+						}
+							
+					}
 					if(!Jokoa.getNireJokoa().amaituta()){
 						Jokalaria j = Jokoa.getNireJokoa().lortuJokalaria();
 						boolean sartuta = j.fitxaSartu(zutabe);
@@ -109,5 +141,10 @@ public class Nagusia extends JFrame{
 		ImageIcon image = new ImageIcon("images/"+kolorea+".png");
 
 		tablero[row][col].setIcon(image);;
+	}
+
+	public void kronEguneratu(long une) {
+		kron.setText(Long.toString(une));
+		
 	}
 }
