@@ -36,7 +36,8 @@ public class Nagusia extends JFrame{
 	private static Nagusia nagusia;
 	private LanguagesController hiztegia = Hizkuntza.getHiztegi();
 	private JLabel kron = new JLabel("0", JLabel.CENTER);
-	
+	private JLabel jok1;
+	private JLabel jok2;
 	
 	private Nagusia(){
 		
@@ -64,14 +65,15 @@ public class Nagusia extends JFrame{
 		panelNagusia.add(panelTablero, BorderLayout.CENTER);
 		JPanel goikoPanela = new JPanel(new BorderLayout());
 		if (Jokoa.getNireJokoa().getModua()==0){
-			JLabel jok1 = new JLabel(hiztegia.getWord("Jok1"));
+			jok1 = new JLabel(hiztegia.getWord("Jok1"));
 			jok1.setForeground(Color.red);
 			jok1.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-			JLabel jok2 = new JLabel(hiztegia.getWord("Jok2"));
+			jok2 = new JLabel(hiztegia.getWord("Jok2"));
 			jok2.setForeground(Color.blue);
 			jok2.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 			goikoPanela.add(jok1, BorderLayout.WEST);
 			goikoPanela.add(jok2, BorderLayout.EAST);
+			jok1.setBorder(BorderFactory.createLineBorder(Color.red));
 		}
 		else{
 			kron.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -145,6 +147,14 @@ public class Nagusia extends JFrame{
 										o.jokatuZaila();
 										Jokoa.getNireJokoa().txandaGehitu();
 									
+								}else{
+									if (Jokoa.getNireJokoa().getTxanda()%2==0){
+										jok1.setBorder(BorderFactory.createLineBorder(Color.red));
+										jok2.setBorder(null);
+									}else{
+										jok2.setBorder(BorderFactory.createLineBorder(Color.blue));
+										jok1.setBorder(null);
+									}
 								}
 							}
 						}else{

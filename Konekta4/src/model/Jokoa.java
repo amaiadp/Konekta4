@@ -153,4 +153,8 @@ public class Jokoa {
 		Kronometro.getKronometro().hasieratu();
 	}
 	
+	public int getTxanda() {
+		return txanda;
+	}
+	
 }
