@@ -127,6 +127,7 @@ public class Amaiera extends JDialog {
 		getContentPane().add(botoiak, BorderLayout.SOUTH);
 		getContentPane().add(printzipala, BorderLayout.CENTER);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 	}

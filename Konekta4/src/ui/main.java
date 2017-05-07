@@ -92,7 +92,11 @@ public class main extends JFrame{
  			}
  		} );
       
-}
+         this.pack();
+
+         setLocationRelativeTo(null);
+         
+	}
 //	public static void main(String[] args) {
 //		main n = new main();
 //		n.hasieratu();

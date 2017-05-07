@@ -59,6 +59,8 @@ public class Hizkuntza extends JFrame{
 	 			}
 	 		} );
 	        pack();
+
+	        setLocationRelativeTo(null);
 	        setVisible(true);
 	      
 	}

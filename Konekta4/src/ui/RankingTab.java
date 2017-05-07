@@ -28,6 +28,7 @@ public class RankingTab extends JDialog{
 		tabPanel.addTab(hiztegia.getWord("rZaila"), rZaila);
 		getContentPane().add(tabPanel, BorderLayout.CENTER);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	
