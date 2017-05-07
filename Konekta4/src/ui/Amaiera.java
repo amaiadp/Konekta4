@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import kud.LanguagesController;
+import model.Jokoa;
 
 public class Amaiera extends JDialog {
 
@@ -26,10 +28,10 @@ public class Amaiera extends JDialog {
 	public void bistaratu(int modua, Boolean irabazlea, int denbora){
 		setLayout(new BorderLayout());
 		setModal(true);
-		JButton berriroHasi = new JButton(hiztegi.getWord("BerriroJokatu"));
+		JButton nagusira = new JButton(hiztegi.getWord("BNivel"));
 		JButton ranking = new JButton(hiztegi.getWord("BRanking"));
 		JButton irten = new JButton(hiztegi.getWord("Irten"));
-		JPanel botoiak = new JPanel();
+		JPanel botoiak = new JPanel(new FlowLayout());
 		botoiak.setBorder(border);
 		ranking.addActionListener(new ActionListener() {
 			
@@ -45,7 +47,7 @@ public class Amaiera extends JDialog {
 				System.exit(0);
 			}
 		});
-		berriroHasi.addActionListener(new ActionListener() {
+		nagusira.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,12 +55,12 @@ public class Amaiera extends JDialog {
 				Nagusia.getnireNagusia().setVisible(false);
 				main.getMain().setVisible(true);
 				dispose();
-				
 			}
 		});
-		botoiak.add(irten, BorderLayout.WEST);
-		botoiak.add(ranking, BorderLayout.CENTER);
-		botoiak.add(berriroHasi, BorderLayout.EAST);
+		
+		botoiak.add(irten);
+		botoiak.add(ranking);
+		botoiak.add(nagusira);
 		
 		JPanel printzipala = new JPanel(new BorderLayout());
 		printzipala.setBorder(border);

@@ -97,9 +97,8 @@ public class main extends JFrame{
          setLocationRelativeTo(null);
          
 	}
-//	public static void main(String[] args) {
-//		main n = new main();
-//		n.hasieratu();
-//		n.setVisible(true);
-//	}
+	public static void main(String[] args) {
+		Hizkuntza h = new Hizkuntza();
+		h.hasieratu();
+	}
 }

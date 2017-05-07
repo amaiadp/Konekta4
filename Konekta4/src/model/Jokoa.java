@@ -111,6 +111,10 @@ public class Jokoa {
 	
 	public void amaitu() {
 		int denbora = -1;
+		Boolean irab = null;
+		if(irabazlea!=null){
+			irab = irabazlea.getFitxa();
+		}
 		if (modua!=0){
 			if(!(irabazlea instanceof Ordenagailua)){
 				denbora = (int)Kronometro.getKronometro().getDenboraTartea();
@@ -132,7 +136,7 @@ public class Jokoa {
 			}
 		}
 		Amaiera amaiera = new Amaiera();
-		amaiera.bistaratu(modua, irabazlea.getFitxa(), denbora);
+		amaiera.bistaratu(modua, irab, denbora);
 		System.out.println("Jokoa amaituta dago");
 	}
 	
