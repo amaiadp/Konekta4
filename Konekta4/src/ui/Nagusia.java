@@ -51,7 +51,7 @@ public class Nagusia extends JFrame{
 	
 	public void hasieratu(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(500, 400);
+		this.setSize(500, 480);
 		kron.setText("0");
 		JPanel panelNagusia =  (JPanel) this.getContentPane();
 		panelNagusia.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -111,10 +111,13 @@ public class Nagusia extends JFrame{
 				
 			}
 		});
-		
+
+		ImageIcon arrow = new ImageIcon("images/arrow.png");
 		for(int col=0; col<column; col++){
 			final int zutabe = col;
 			JButton botoia = new JButton();
+			botoia.setIcon(arrow);
+			botoia.setSize(45, 45);
 			panelTablero.add(botoia);
 			botoia.addActionListener(new ActionListener() {
 				
@@ -154,6 +157,9 @@ public class Nagusia extends JFrame{
 		for(int r=0; r<row;r++){
 			for(int col=0; col <column;col++){
 				JLabel lauki = new JLabel();
+				lauki.setHorizontalAlignment(JLabel.CENTER);
+				lauki.setVerticalAlignment(JLabel.CENTER);
+				lauki.setSize(45, 45);
 				lauki.setHorizontalAlignment(JLabel.CENTER);
 				tablero[r][col] = lauki;
 				panelTablero.add(lauki);
