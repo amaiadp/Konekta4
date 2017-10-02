@@ -36,7 +36,7 @@ public class Tablero {
 			}
 		}
 		return row;
-		
+		//probaa
 		
 	}
 	public boolean konprobatu(boolean nor, int row, int col) {
