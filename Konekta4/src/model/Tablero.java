@@ -17,7 +17,7 @@ public class Tablero {
 	
 	public void setTablero(int row, int col, Boolean jok){
 		this.lista[row][col]=jok;
-		
+		//tableroo...
 		
 	}
 	public int azkenaLortuLibre(int col) {
