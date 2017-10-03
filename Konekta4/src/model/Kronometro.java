@@ -16,8 +16,8 @@ public class Kronometro{
 			myKro=new Kronometro();
 		}
 		return myKro;
-		//kronometroa
-		//Kronometroak
+		
+		
 	}
 
 	private void hasi(){
