@@ -16,7 +16,7 @@ public class Kronometro{
 			myKro=new Kronometro();
 		}
 		return myKro;
-		//kronometro
+	
 		
 		
 	}
